@@ -652,7 +652,7 @@ func (na *cnmNetworkAllocator) deallocateVIP(vip *api.Endpoint_VirtualIP) error 
 	if localNet == nil {
 		return errors.New("networkallocator: could not find local network state")
 	}
-	if localNet.isNodeLocal {
+	if localNet.isNodeLocal || vip.Addr == "" {
 		return nil
 	}
 	ipam, _, _, err := na.resolveIPAM(localNet.nw)
